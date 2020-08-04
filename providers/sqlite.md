@@ -1,3 +1,9 @@
+---
+description: >-
+  A provider that Josh can use to communicate with an SQLite database using
+  better-sqlite3
+---
+
 # sqlite
 
 SQLite communication is provided by better-sqlite3. 
