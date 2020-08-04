@@ -5,7 +5,9 @@
 * [Providers](providers/README.md)
   * [sqlite](providers/sqlite.md)
 * [Basic Usage](usage.md)
-* [Examples](examples.md)
+* [Examples](examples/README.md)
+  * [Express Example](examples/express.md)
+  * [Typescript Usage](examples/typescript-usage.md)
 * [API](api.md)
 * [Testing Stuff](testing.md)
 
