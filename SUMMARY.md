@@ -11,6 +11,6 @@
 * [Examples](examples/README.md)
   * [Express Example](examples/express.md)
   * [Typescript Usage](examples/typescript-usage.md)
-* [API](api.md)
+* [Josh API Documentation](api.md)
 * [Testing Stuff](testing.md)
 

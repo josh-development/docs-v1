@@ -41,12 +41,11 @@ const db = new Josh({
   provider: '@josh-providers/sqlite',
 });
 
-db.defer.then( async () => {
+(async () => {
   console.log(`Connected, there are ${await db.size} rows in the database.`);
-});
+})();
 
 rl.on('line', async (input) => {
-  await db.defer;
   console.log(`PROCESSING INPUT: ${input}`);
   const result = await evalCode(input);
   console.log(result);
