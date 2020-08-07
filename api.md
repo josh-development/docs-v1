@@ -4,7 +4,7 @@
 ## Josh
 **Kind**: global class  
 
-* [Josh](#Josh)
+* [Josh](#josh)
     * [new Josh([options])](#new-josh-options)
     * [.keys](#josh-keys-promise-less-than-array-string-greater-than) ⇒ <code>Promise.&lt;Array.String&gt;</code>
     * [.values](#josh-values-promise-less-than-array-greater-than) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -71,12 +71,12 @@ Get the amount of rows inside the database.
 **Returns**: <code>Promise.&lt;integer&gt;</code> - An integer equal to the amount of stored key/value pairs.  
 <a name="Josh+set"></a>
 
-### josh.set(keyOrPath, value) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#Josh)
+### josh.set(keyOrPath, value) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#josh)
 Store a value in the database. If a simple key is provided, creates or overwrites the entire value with the new one provide.
 If a path is provided, and the stored value is an object, only the value at the path will be overwritten.
 
 **Kind**: instance method of [<code>Josh</code>](#josh)  
-**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#Josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
+**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -198,11 +198,11 @@ of rows in the database, only the available number of rows will be returned.
 
 <a name="Josh+delete"></a>
 
-### josh.delete(keyOrPath) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#Josh)
+### josh.delete(keyOrPath) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#josh)
 Remove a key/value pair, or the property and value at a specific path, or clear the database.
 
 **Kind**: instance method of [<code>Josh</code>](#josh)  
-**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#Josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
+**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -210,11 +210,11 @@ Remove a key/value pair, or the property and value at a specific path, or clear 
 
 <a name="Josh+push"></a>
 
-### josh.push(keyOrPath, value, allowDupes) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#Josh)
+### josh.push(keyOrPath, value, allowDupes) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#josh)
 Add a new value to an array.
 
 **Kind**: instance method of [<code>Josh</code>](#josh)  
-**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#Josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
+**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -224,11 +224,11 @@ Add a new value to an array.
 
 <a name="Josh+remove"></a>
 
-### josh.remove(keyOrPath, value) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#Josh)
+### josh.remove(keyOrPath, value) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#josh)
 Remove a value from an array, by value (simple values like strings and numbers) or function (complex values like arrays or objects).
 
 **Kind**: instance method of [<code>Josh</code>](#josh)  
-**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#Josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
+**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -246,11 +246,11 @@ josh.remove('objectarray', (value) => value.e === 5); // value is now [{ a: 1, b
 ```
 <a name="Josh+inc"></a>
 
-### josh.inc(keyOrPath) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#Josh)
+### josh.inc(keyOrPath) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#josh)
 Increments (adds 1 to the number) the stored value.
 
 **Kind**: instance method of [<code>Josh</code>](#josh)  
-**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#Josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
+**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -258,11 +258,11 @@ Increments (adds 1 to the number) the stored value.
 
 <a name="Josh+dec"></a>
 
-### josh.dec(keyOrPath) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#Josh)
+### josh.dec(keyOrPath) ⇒ [<code>Promise.&lt;Josh&gt;</code>](#josh)
 Decrements (remove 1 from the number) the stored value.
 
 **Kind**: instance method of [<code>Josh</code>](#josh)  
-**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#Josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
+**Returns**: [<code>Promise.&lt;Josh&gt;</code>](#josh) - This database wrapper, useful if you want to chain more instructions for Josh.  
 
 | Param | Type | Description |
 | --- | --- | --- |
