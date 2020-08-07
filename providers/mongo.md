@@ -4,7 +4,7 @@ description: >-
   mongodb module.
 ---
 
-# mongo
+# MongoDB
 
 This provider is planned and not yet available.
 

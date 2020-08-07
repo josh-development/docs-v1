@@ -11,10 +11,10 @@
 ## Providers
 
 * [About Providers](providers/about.md)
-* [sqlite](providers/sqlite.md)
-* [mongo](providers/mongo.md)
-* [postgre](providers/postgre.md)
-* [https](providers/https.md)
+* [SQLite](providers/sqlite.md)
+* [MongoDB](providers/mongo.md)
+* [PostgreSQL](providers/postgre.md)
+* [HTTPS](providers/https.md)
 
 ## Examples
 
@@ -26,4 +26,5 @@
 
 * [Testing Stuff](development/testing.md)
 * [Contributing](development/contributing.md)
+* [Creating a Provider](development/creating-a-provider.md)
 

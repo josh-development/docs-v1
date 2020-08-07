@@ -4,7 +4,7 @@ description: >-
   the pg module.
 ---
 
-# postgre
+# PostgreSQL
 
 This provider is planned and not yet available.
 

@@ -4,7 +4,7 @@ description: >-
   server running the josh-api server
 ---
 
-# https
+# HTTPS
 
 This provider is planned and not yet available. The josh-api server is also not yet developed.
 

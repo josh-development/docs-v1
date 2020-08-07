@@ -4,7 +4,7 @@ description: >-
   better-sqlite3
 ---
 
-# sqlite
+# SQLite
 
 SQLite communication is provided by better-sqlite3. 
 

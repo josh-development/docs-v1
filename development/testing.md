@@ -4,7 +4,7 @@ If you feel the need to "test" JOSH's functionality from a command line, you're 
 
 The script uses a simple `readline` module that's core to node, so really the only thing it needs to run is `josh` itself, and a provider such as `@josh-providers/sqlite` . 
 
-You'll need to install the appropriate provider, see [Providers ]()for instructions.
+You'll need to install the appropriate provider, see [Providers ](../providers/about.md)for instructions.
 
 Here's the script: 
 
