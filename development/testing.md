@@ -11,6 +11,7 @@ Here's the script:
 ```javascript
 const readline = require('readline');
 const Josh = require('josh');
+const provider = require('@josh-providers/sqlite');
 
 const clean = async (text) => {
   if (text && text.constructor.name == 'Promise') {
@@ -38,7 +39,7 @@ const rl = readline.createInterface({
 
 const db = new Josh({
   name: 'testing',
-  provider: '@josh-providers/sqlite',
+  provider,
 });
 
 (async () => {

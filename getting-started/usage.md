@@ -4,10 +4,11 @@
 
 ```javascript
 const Josh = require("josh");
+const provider = require('@josh-providers/sqlite');
 
 const db = new Josh({
   name: 'testing',
-  provider: '@josh-providers/sqlite',
+  provider,
 });
 
 // this is an "IIFE", immediately invoked function expression.

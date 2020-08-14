@@ -14,6 +14,7 @@ Josh is still in Alpha. This example may not be up to date at all times.
 // You can simply import Josh here.
 // Josh is default exported no need to destructure.
 import Josh from "josh";
+import provider from "@josh-providers/sqlite";
 
 // We use generic types to ensure the return type.
 // This way we aren't using Typescript for nothing always using an 'any' type.
@@ -22,19 +23,18 @@ import Josh from "josh";
 // As an example we will store an array of strings.
 const db = new Josh<string[]>({
   name: "example",
-  provider: "@josh-providers/sqlite",
+  provider,
 });
 
 // Don't want a strong-typed Josh? You can!
 // Simply don't use a generic type, the default generic is 'unknown'.
 const db = new Josh({
   name: "example",
-  provider: "@josh-providers/sqlite",
+  provider,
 });
 
 // Wait for the database to be ready.
 (async () => {
-  await db.defer;
   console.log(`Connected, there are ${await db.size} rows in the database.`);
 })();
 ```
