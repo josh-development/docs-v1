@@ -53,11 +53,12 @@ yarn add @josh-providers/sqlite
 Using the sqlite provider goes as such:
 
 ```javascript
-const Josh = require('josh');
+const Josh = require("josh");
+const provider = require("@josh-providers/sqlite");
 
-const db = new Josh({
-  name: 'testing',
-  provider: '@josh-providers/sqlite',
+const myDb = new Josh({
+  name: 'test',
+  provider,
 });
 
 db.defer.then( () => {

@@ -1,13 +1,16 @@
+# Typescript Usage
+
 Source for this page is [here](https://github.com/RealShadowNova/josh-examples/blob/master/typescript/quick-usage-example.md)
 
 Josh is compatible with Typescript, we are constantly updating the types as soon as new features or modifications are added to assure you have no issues on your end.
 
 ## NOTICE!
+
 Josh is still in Alpha. This example may not be up to date at all times.
 
 ### Importing a Josh and Initiating a Josh
 
-```ts
+```typescript
 // You can simply import Josh here.
 // Josh is default exported no need to destructure.
 import Josh from "josh";
@@ -38,7 +41,7 @@ const db = new Josh({
 
 ### Basic usage
 
-```ts
+```typescript
 // Josh methods are async, so make sure to always be in an asynchronous scope.
 (async () => {
   // Setting data.
@@ -81,3 +84,4 @@ const db = new Josh({
   await db.delete("arrayofobj.1"); // deletes one array element by index
 })();
 ```
+

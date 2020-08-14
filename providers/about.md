@@ -25,16 +25,17 @@ You sure can! Even though I do my best to create providers for popular storage s
 
 Providers must be installed separately from Josh and are installed as any NPM module is, through either `yarn` or `npm` in the command line. For example, `yarn add @josh-providers/sqlite`. Note that each provider may have pre-requisites before installation, check the provider page for details.
 
-To use a provider, you don't need to require it, Josh will do that itself. Simply provider the module name as a string, and the `providerOptions` if required, and Josh does the rest!
+To use a provider, simply require it, give it to Josh along with the `providerOptions` if required, and Josh does the rest!
 
 For example, again with the sqlite module:
 
 ```javascript
 const Josh = require("josh");
+const provider = require("@josh-providers/sqlite");
 
 const myDb = new Josh({
   name: 'test',
-  provider: '@josh-providers/sqlite',
+  provider,
   providerOptions: {
     dataDir: './data'
   }
