@@ -7,6 +7,7 @@
 * [Installation](getting-started/install.md)
 * [Basic Usage](getting-started/usage.md)
 * [Josh API Documentation](getting-started/api.md)
+* [Migrating from Enmap](getting-started/migrating-from-enmap.md)
 
 ## Providers
 
