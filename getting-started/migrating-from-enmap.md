@@ -64,7 +64,7 @@ const target = new Josh({
 // We need to await the enmap's initialization and data loading,
 // so we're going to do that with an async IIFE to simplify things.
 // An IIFE is just a function that runs immediately, in this case an async one.
-(async () {
+(async () => {
   await source.defer;
   console.log(`Loaded Enmap with ${source.count} rows to transfer`);
   console.log(`Target JOSH currently has ${await target.size} rows.`);
@@ -159,6 +159,7 @@ Here is a list of methods and properties that have changed in either their name,
 * keyArray\(\), indexes =&gt; combined as `await josh.keys();`
 * findAll\(\) =&gt; use filter\(\) instead, same thing.
 * findKey\(\) =&gt; use find\(\) and it returns the key, too.
+* exists\(\) =&gt; `await josh.has("key.path");`
 
 ### Methods that are not yet implemented
 
@@ -170,7 +171,6 @@ Josh being in early access right now, the following are not implemented yet:
 * clear\(\)
 * destroy\(\)
 * export\(\)
-* exists\(\)
 * map\(\)
 * some\(\)
 * every\(\)
