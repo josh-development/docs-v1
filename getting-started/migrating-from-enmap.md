@@ -170,7 +170,6 @@ Josh being in early access right now, the following are not implemented yet:
 * includes\(\)
 * clear\(\)
 * destroy\(\)
-* export\(\)
 * map\(\)
 * some\(\)
 * every\(\)
