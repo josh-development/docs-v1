@@ -2,7 +2,7 @@
 
 So, you want to create your own provider? I'm too slow to make them, aren't I? Well, you're in luck, because I've made every attempt to document what's required for new providers to be built. Specifically, below is a list of methods that they need to support. 
 
-For examples of how these methods might work, please look at [existing providers](https://github.com/eslachance/josh-providers/] and their code. If you can make those methods more efficient or performant using core features of your database then by all means, feel free to do so! But, they must return the data in the format described in the code.
+For examples of how these methods might work, please look at [existing providers](https://github.com/eslachance/josh-providers/) and their code. If you can make those methods more efficient or performant using core features of your database then by all means, feel free to do so! But, they must return the data in the format described in the code.
 
 Note that the documentation below doesn't include example return values, but [the source code does](https://github.com/eslachance/josh-providers/docs/base_provider.js).
 
