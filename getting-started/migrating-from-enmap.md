@@ -166,15 +166,6 @@ Here is a list of methods and properties that have changed in either their name,
 Josh being in early access right now, the following are not implemented yet:
 
 * observe\(\)
-* math\(\)
-* includes\(\)
-* clear\(\)
-* destroy\(\)
-* map\(\)
-* some\(\)
-* every\(\)
-* reduce\(\)
-* multi\(\)
 
 ### Methods that will not be implemented
 
