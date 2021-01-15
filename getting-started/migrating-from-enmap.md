@@ -43,8 +43,8 @@ Create a new file in your project called `migration.js`. In this file we're goin
 ```javascript
 // Require enmap, josh, and the provider
 const Enmap = require("enmap");
-const Josh = require("josh");
-const provider = require("@josh-provider/sqlite");
+const Josh = require("@joshdb/core");
+const provider = require("@joshdb/sqlite");
 
 // Initialize the enmap. You MUST of course use the same NAME option,
 // and if you've changed the dataDir option, set it identically here too.

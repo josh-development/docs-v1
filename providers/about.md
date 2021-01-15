@@ -30,8 +30,8 @@ To use a provider, simply require it, give it to Josh along with the `providerOp
 For example, again with the sqlite module:
 
 ```javascript
-const Josh = require("josh");
-const provider = require("@josh-providers/sqlite");
+const Josh = require("@joshdb/core");
+const provider = require("@joshdb/sqlite");
 
 const myDb = new Josh({
   name: 'test',

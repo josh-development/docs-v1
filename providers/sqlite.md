@@ -43,9 +43,9 @@ As for the C++ build tools, that's installed using the simple command: `sudo apt
 In your project folder, assuming the above pre-requisites are followed, you should be able to just install using this command:
 
 ```text
-npm i @josh-providers/sqlite
+npm i @joshdb/sqlite
 ** OR **
-yarn add @josh-providers/sqlite
+yarn add @joshdb/sqlite
 ```
 
 ### Usage
@@ -53,8 +53,8 @@ yarn add @josh-providers/sqlite
 Using the sqlite provider goes as such:
 
 ```javascript
-const Josh = require("josh");
-const provider = require("@josh-providers/sqlite");
+const Josh = require("@joshdb/core");
+const provider = require("@joshdb/sqlite");
 
 const myDb = new Josh({
   name: 'test',

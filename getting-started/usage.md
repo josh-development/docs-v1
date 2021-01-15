@@ -3,8 +3,8 @@
 \[ TBD \] - Documentation isn't yet ready fully but here's a few examples: 
 
 ```javascript
-const Josh = require("josh");
-const provider = require('@josh-providers/sqlite');
+const Josh = require("@joshdb/core");
+const provider = require('@joshdb/sqlite');
 
 const db = new Josh({
   name: 'testing',

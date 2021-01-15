@@ -13,8 +13,8 @@ Josh is still in Alpha. This example may not be up to date at all times.
 ```typescript
 // You can simply import Josh here.
 // Josh is default exported no need to destructure.
-import Josh from "josh";
-import provider from "@josh-providers/sqlite";
+import Josh from "@joshdb/core";
+import provider from "@joshdb/sqlite";
 
 // We use generic types to ensure the return type.
 // This way we aren't using Typescript for nothing always using an 'any' type.
