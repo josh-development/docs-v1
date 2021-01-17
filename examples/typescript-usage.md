@@ -1,7 +1,5 @@
 # Typescript Usage
 
-Source for this page is [here](https://github.com/RealShadowNova/josh-examples/blob/master/typescript/quick-usage-example.md)
-
 Josh is compatible with Typescript, we are constantly updating the types as soon as new features or modifications are added to assure you have no issues on your end.
 
 ## NOTICE!
