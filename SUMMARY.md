@@ -9,6 +9,7 @@
 * [Josh API Documentation](getting-started/api.md)
 * [Using the Path](getting-started/path.md)
 * [Migrating from Enmap](getting-started/migrating-from-enmap.md)
+* [FAQ](getting-started/faq.md)
 
 ## Providers
 
