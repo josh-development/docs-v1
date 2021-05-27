@@ -5,15 +5,15 @@ description: >-
   development time.
 ---
 
-# About Providers
+# Providers
 
 ## What is a Provider?
 
-A Provider is a layer of communication between Josh, and a database. Each provider has a precise set of instructions it can receive from Josh, where each instruction tells it what to do in the database.
+A Provider is a layer of communication between JOSH, and a database. Each provider has a precise set of instructions it can receive from JOSH, where each instruction tells it what to do in the database.
 
 ## What Providers are available?
 
-At the moment, the only two providers that are functional are [sqlite](sqlite.md) and [mongo](mongo.md). As I continue developing, I'll be adding more providers to the list - see the list on the left in the Table of Content to see which ones I'm working on!
+At the moment, only a few providers are available at all. As time develops, more will be added. Please see the menu on the left to see available providers!
 
 ## Can I add my own Provider?
 

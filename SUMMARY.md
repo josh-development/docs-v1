@@ -13,9 +13,11 @@
 
 ## Providers
 
-* [About Providers](providers/about.md)
+* [Providers](providers/about.md)
 * [SQLite](providers/sqlite.md)
 * [MongoDB](providers/mongo.md)
+* [JSON](providers/json.md)
+* [IndexedDB](providers/indexeddb.md)
 * [PostgreSQL](providers/postgre.md)
 * [HTTPS](providers/https.md)
 

@@ -6,4 +6,5 @@ description: >-
 
 # PostgreSQL
 
-This provider is planned and not yet available.
+This provider is planned, but not yet available.
+

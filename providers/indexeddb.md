@@ -1,34 +1,34 @@
 ---
-description: >-
-  The IndexedDB provider uses javascript IndexedDB api to store a database in browser
+description: That's right. JOSH... in your BROWSER! OMG!
 ---
 
-# IndexedDB 
+# IndexedDB
 
-### Running the installer
+IndexedDB is an API that's common to all browsers \(except, as usual, Opera Mini because it supports nothing, and IE11 because it should die in a fire\). With the IndexedDB provider, you can literally store data persistently in a browser - for your website built with React, Vue, jQuery... whatever it is, it can access the browser IndexedDB and you can use it with JOSH
 
-In your project folder, you should be able to install using this command:
+{% hint style="info" %}
+There are not provider options with the IndexedDB provider, but an empty option object must still be given.
+{% endhint %}
 
-```
+### Using with Webpack
+
+To use with Webpack, install with your project: 
+
+```text
 npm i @joshdb/indexeddb
 ** OR **
 yarn add @joshdb/indexeddb
 ```
 
-## Usage
+Then, in your code, use it as necessary:
 
-Using the IndexedDB provider goes as such:
-
-### Webpack
-
-```js
-const Josh = require('josh');
+```javascript
+const Josh = require('@joshdb/core');
 const JoshIndexedDB = require('@joshdb/indexeddb');
 
 const db = new Josh({
   name: 'testing',
   provider: JoshIndexedDB,
-  // See below for all provider options.
   providerOptions: {},
 });
 
@@ -37,9 +37,9 @@ db.defer.then(async () => {
 });
 ```
 
-### CDN
+### Using from a CDN \(Directly in your website\)
 
-```html
+```markup
 <script src="https://unpkg.com/@joshdb/core"></script>
 <script src="https://unpkg.com/@joshdb/indexeddb@latest/dist/main.js"></script>
 <script>
@@ -49,7 +49,6 @@ db.defer.then(async () => {
   const db = new Josh({
     name: 'testing',
     provider: JoshIndexedDB,
-    // See below for all provider options.
     providerOptions: {},
   });
 
@@ -59,8 +58,5 @@ db.defer.then(async () => {
 </script>
 ```
 
-## Provider Options
 
-| Param             | Type                | Description                 |
-| ----------------- | ------------------- | --------------------------- |
-| [providerOptions] | <code>Object</code> | The Provider Options Object |
+

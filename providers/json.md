@@ -1,26 +1,27 @@
 ---
-description: >-
-  The JSON provider uses the atomically module for persistent storage of JOSH data.
+description: 'That''s right. You heard me. JSON Storage. Don''t try this at home, folks!'
 ---
 
 # JSON
 
-### Running the installer
+The fabled JSON storage is a strange beast - I myself have specifically told \*many\* people before that storing data in JSON files is _not_ an appropriate database. On the other hand, the reason I say this all the time is that people don't ever do it _correctly_. So... here's JSON storage done right, for your pleasure.
 
-In your project folder, you should be able to install using this command:
+### Installation
 
-```
+To install the JSON provider, run the following:
+
+```text
 npm i @joshdb/json
 ** OR **
 yarn add @joshdb/json
 ```
 
-## Usage
+### Usage
 
-Using the JSON provider goes as such:
+Here's how you setup and use the JSON provider: 
 
-```js
-const Josh = require('josh');
+```javascript
+const Josh = require('@joshdb/core');
 const JoshJSON = require('@joshdb/json');
 
 const db = new Josh({
@@ -35,14 +36,7 @@ db.defer.then(async () => {
 });
 ```
 
-## Provider Options
+### Provider Options
 
-Here is a list of full options this provider supports:
+\[TBD\]
 
-| Param                          | Type                 | Description                                                            |
-| ------------------------------ | -------------------- | ---------------------------------------------------------------------- |
-| [providerOptions]              | <code>Object</code>  | The Provider Options Object, with the below properties:                |
-| [providerOptions.maxLength]    | <code>string</code>  | Optional, defaults to `100`. The amount of entries per json chunk file |
-| [providerOptions.dataDir]      | <code>string</code>  | Optional, defaults to `data`. The location for the stored json files   |
-| [providerOptions.indexAll]     | <code>boolean</code> | Optional, defaults to `false`. Adds new keys from the stored json files |
-| [providerOptions.cleanupEmpty] | <code>boolean</code> | Optional, defaults to `false`. Cleans out empty keys from index file   |

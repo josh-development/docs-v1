@@ -20,9 +20,7 @@ If you find that you're often pulling data from JOSH and manually manipulating i
 
 ## Are you ever going to add Types or Typescript support?
 
-No. While there are typing files in JOSH, those are all provided by some of my users which contribute to the success of the project with their dedication to TypeScript but... I have no intention, personally, of managing types. 
+No. While there are typing files in JOSH, those are all provided by some of my users which contribute to the success of the project with their dedication to TypeScript but... I have no intention, personally, of managing types. However, the community has obliged, there's a [Typescript Example](../examples/typescript-usage.md), and I will accept PRs meant to enhance the experience of TS users.
 
 As for adding types to the stored data...  I won't, ever, it's not happening. JOSH isn't a typed ORM, it's the antitheses of typed ORMs. It's the typed ORM's worse nightmare, because I make every effort **not** to type and create models. The entire point of JOSH is to be freeform "whatever you want stored it stores it" concept. JOSH is not compatible with the typed data philosophy at all and will never be.
-
-
 
