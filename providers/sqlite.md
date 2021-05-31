@@ -61,8 +61,8 @@ const myDb = new Josh({
   provider,
 });
 
-db.defer.then( () => {
-  console.log(`Connected, there are ${db.count} rows in the database.`);
+db.defer.then(() => {
+  console.log(`Connected, there are ${await db.size} rows in the database.`);
 });
 ```
 
