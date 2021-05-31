@@ -28,9 +28,9 @@ _**MAKE A BACKUP OF YOUR PROJECT NOW**_. If you're using GIT that's simple, just
 
 ## Step 1: Installation
 
-The TL;DR of the Installation page is that you just need to run `npm i josh@latest` or `yarn add josh@latest` in your project to get Josh itself. You can simply do this in your project folder, because we can do all this within that folder without losing any data. 
+The TL;DR of the Installation page is that you just need to run `npm i @joshdb/core@latest` or `yarn add @joshdb/core@latest` in your project to get Josh itself. You can simply do this in your project folder, because we can do all this within that folder without losing any data. 
 
-Then, you choose a provider and you install that, too, with its pre-requisites. In this example we're going for the SQLite provider, but the instructions should be identical for all of them except for the provider name. So in our case, with the windows-build-tools already installed \(because you're using Enmap, you have those already!\) we can just `npm i @josh-providers/sqlite` or `yarn add @josh-providers@sqlite` to add it. 
+Then, you choose a provider and you install that, too, with its pre-requisites. In this example we're going for the SQLite provider, but the instructions should be identical for all of them except for the provider name. So in our case, with the windows-build-tools already installed \(because you're using Enmap, you have those already!\) we can just `npm i @joshdb/sqlite` or `yarn add @joshdb/sqlite` to add it. 
 
 With those 2 modules added we can continue on to the migration itself. DO NOT DELETE OR UNINSTALL ENMAP OR ITS DATA YET, obviously.
 
@@ -134,14 +134,14 @@ Josh support async functions for find\(\), filter\(\) and some\(\). However, the
 ```javascript
 // Get a value by path: where the <value>.users.owner is the current user,
 // basically "a guild where I'm owner that has settings" if that makes sense.
-const myGuild = client.settings.find("users.owner", message.author.id);
+const myGuild = await client.settings.find("users.owner", message.author.id);
 
 // Filter to get all users in the database where the permissions.admin is true
-const admins = blogUsers.filter("permissions.admin", true);
+const admins = await blogUsers.filter("permissions.admin", true);
 
 // The 2 above, in function equivalence:
-const myGuild = client.settings.find( set => set.users.owner = message.author.id);
-const admins = blogUsers.filter(user => user.permissions.admin);
+const myGuild = await client.settings.find(setting => setting.users.owner === message.author.id);
+const admins = await blogUsers.filter(user => user.permissions.admin);
 ```
 
 Also note that _the return value_ for these functions has changed. Rather than having `find()` and `findKey()` separated, each method that can return multiple results will always return an array of \[key, value\] pairs, such as `[ [a, 1], [b, 2], [c, 3] ]`. This is the case even if you're using a path check.
