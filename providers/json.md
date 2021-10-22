@@ -1,5 +1,5 @@
 ---
-description: 'That''s right. You heard me. JSON Storage. Don''t try this at home, folks!'
+description: That's right. You heard me. JSON Storage. Don't try this at home, folks!
 ---
 
 # JSON
@@ -10,7 +10,7 @@ The fabled JSON storage is a strange beast - I myself have specifically told \*m
 
 To install the JSON provider, run the following:
 
-```text
+```
 npm i @joshdb/json
 ** OR **
 yarn add @joshdb/json
@@ -18,7 +18,7 @@ yarn add @joshdb/json
 
 ### Usage
 
-Here's how you setup and use the JSON provider: 
+Here's how you setup and use the JSON provider:&#x20;
 
 ```javascript
 const Josh = require('@joshdb/core');
@@ -38,5 +38,4 @@ db.defer.then(async () => {
 
 ### Provider Options
 
-\[TBD\]
-
+\[TBD]

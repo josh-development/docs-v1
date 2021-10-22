@@ -6,7 +6,7 @@ description: >-
 
 # SQLite
 
-SQLite communication is provided by better-sqlite3. 
+SQLite communication is provided by better-sqlite3.&#x20;
 
 This provider requires building better-sqlite3 from source, so you'll need to make sure your system is ready for that.
 
@@ -26,11 +26,11 @@ npm i -g node-gyp
 
 > It's _very important_ that this be run in the **administrative** prompt, and not a regular one.
 
-Once the windows-build-tools are installed \(this might take quite some time, depending on your internet connection\), **close all open command prompts, powershell windows, and editors with a built-in console/prompt**. Otherwise, the next command will not work.
+Once the windows-build-tools are installed (this might take quite some time, depending on your internet connection), **close all open command prompts, powershell windows, and editors with a built-in console/prompt**. Otherwise, the next command will not work.
 {% endtab %}
 
 {% tab title="Linux" %}
-On Linux, the pre-requisites are much simpler in a way. A lot of modern systems \(such as Ubuntu, since 16.04\) already come with python pre-installed. For some other systems, you might have to fiddle with it to either get python installed, or working. Google will be your friend.
+On Linux, the pre-requisites are much simpler in a way. A lot of modern systems (such as Ubuntu, since 16.04) already come with python pre-installed. For some other systems, you might have to fiddle with it to either get python installed, or working. Google will be your friend.
 
 Check if it's installed by running `python --version` which should return the appropriate 2.x or 3.x version.
 
@@ -42,7 +42,7 @@ As for the C++ build tools, that's installed using the simple command: `sudo apt
 
 In your project folder, assuming the above pre-requisites are followed, you should be able to just install using this command:
 
-```text
+```
 npm i @joshdb/sqlite
 ** OR **
 yarn add @joshdb/sqlite
@@ -65,4 +65,3 @@ db.defer.then( () => {
   console.log(`Connected, there are ${db.count} rows in the database.`);
 });
 ```
-

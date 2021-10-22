@@ -4,7 +4,7 @@ description: That's right. JOSH... in your BROWSER! OMG!
 
 # IndexedDB
 
-IndexedDB is an API that's common to all browsers \(except, as usual, Opera Mini because it supports nothing, and IE11 because it should die in a fire\). With the IndexedDB provider, you can literally store data persistently in a browser - for your website built with React, Vue, jQuery... whatever it is, it can access the browser IndexedDB and you can use it with JOSH
+IndexedDB is an API that's common to all browsers (except, as usual, Opera Mini because it supports nothing, and IE11 because it should die in a fire). With the IndexedDB provider, you can literally store data persistently in a browser - for your website built with React, Vue, jQuery... whatever it is, it can access the browser IndexedDB and you can use it with JOSH
 
 {% hint style="info" %}
 There are not provider options with the IndexedDB provider, but an empty option object must still be given.
@@ -12,9 +12,9 @@ There are not provider options with the IndexedDB provider, but an empty option 
 
 ### Using with Webpack
 
-To use with Webpack, install with your project: 
+To use with Webpack, install with your project:&#x20;
 
-```text
+```
 npm i @joshdb/indexeddb
 ** OR **
 yarn add @joshdb/indexeddb
@@ -37,7 +37,7 @@ db.defer.then(async () => {
 });
 ```
 
-### Using from a CDN \(Directly in your website\)
+### Using from a CDN (Directly in your website)
 
 ```markup
 <script src="https://unpkg.com/@joshdb/core"></script>
@@ -57,6 +57,4 @@ db.defer.then(async () => {
   });
 </script>
 ```
-
-
 

@@ -4,9 +4,9 @@ description: How to install the JOSH Core Database Wrapper
 
 # Installation
 
-JOSH is installed very simply through `yarn` or `npm`: 
+JOSH is installed very simply through `yarn` or `npm`:&#x20;
 
-```text
+```
 npm i @joshdb/core
 * OR *
 yarn add @joshdb/core
@@ -22,7 +22,7 @@ However, JOSH cannot function without a [Provider](../providers/about.md), which
 
 See the Providers page and choose one!
 
-{% page-ref page="../providers/about.md" %}
-
-
+{% content-ref url="../providers/about.md" %}
+[about.md](../providers/about.md)
+{% endcontent-ref %}
 

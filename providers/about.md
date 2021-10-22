@@ -41,4 +41,3 @@ const myDb = new Josh({
   }
 });
 ```
-

@@ -7,4 +7,3 @@ description: >-
 # PostgreSQL
 
 This provider is planned, but not yet available.
-

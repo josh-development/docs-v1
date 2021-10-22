@@ -1,6 +1,6 @@
 # Basic Usage
 
-\[ TBD \] - Documentation isn't yet ready fully but here's a few examples: 
+\[ TBD ] - Documentation isn't yet ready fully but here's a few examples:&#x20;
 
 ```javascript
 const Josh = require("@joshdb/core");
@@ -49,4 +49,3 @@ const db = new Josh({
   await db.delete("arrayofobj.1"); // deletes one array element by index
 })();
 ```
-

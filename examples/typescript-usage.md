@@ -82,4 +82,3 @@ const db = new Josh({
   await db.delete("arrayofobj.1"); // deletes one array element by index
 })();
 ```
-

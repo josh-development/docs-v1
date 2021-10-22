@@ -1,4 +1,3 @@
 # Express Example
 
-\[tbd\]
-
+\[tbd]
