@@ -1,0 +1,16 @@
+input: .
+output: .retype
+url: josh.evie.dev
+branding:
+  logo:  assets/josh_p_light.svg
+links:
+- text: Github
+  link: https://github.com/eslachance/josh
+- text: NPM
+  link: https://npmjs.com/package/@joshdb/core
+- text: Discord
+  link: https://discord.gg/N7ZKH3P
+edit:
+  repo: "http://github.com/josh-development/josh.github.io/edit/"
+footer:
+  copyright: "&copy; Copyright {{ year }}. All rights reserved."

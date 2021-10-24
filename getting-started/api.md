@@ -6,43 +6,6 @@ description: >-
 
 # Josh API Documentation
 
-## Josh
-
-**Kind**: global class
-
-* [Josh](api.md#Josh)
-  * [new Josh(\[options\])](api.md#new-josh-options)
-  * _instance_
-    * [.keys](api.md#Josh+keys) ⇒ `Promise.<Array.String>`
-    * [.values](api.md#Josh+values) ⇒ `Promise.<Array>`
-    * [.size](api.md#Josh+size) ⇒ `Promise.<number>`
-    * [.get(keyOrPath)](api.md#Josh+get) ⇒ `Promise.<*>`
-    * [.getMany(keys)](api.md#Josh+getMany) ⇒ `Promise.<Object>`
-    * [.random(count)](api.md#Josh+random) ⇒ `Promise.<Object>`
-    * [.randomKey(count)](api.md#Josh+randomKey) ⇒ `Promise.<Array.<string>>`
-    * [.has(keyOrPath)](api.md#Josh+has) ⇒ `Promise.<boolean>`
-    * [.set(keyOrPath, value)](api.md#Josh+set) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.setMany(data, overwrite)](api.md#Josh+setMany) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.update(keyOrPath, input)](api.md#Josh+update) ⇒ `Promise.<Object>`
-    * [.ensure(keyOrPath, defaultValue)](api.md#Josh+ensure) ⇒ `Promise.<*>`
-    * [.delete(keyOrPath)](api.md#Josh+delete) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.push(keyOrPath, value, allowDupes)](api.md#Josh+push) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.remove(keyOrPath, value)](api.md#Josh+remove) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.inc(keyOrPath)](api.md#Josh+inc) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.dec(keyOrPath)](api.md#Josh+dec) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.find(pathOrFn, predicate)](api.md#Josh+find) ⇒ `Promise.<Object>`
-    * [.filter(pathOrFn, predicate)](api.md#Josh+filter) ⇒ `Promise.<Object>`
-    * [.map(pathOrFn)](api.md#Josh+map) ⇒ `Promise.<Array.<*>>`
-    * [.includes(keyOrPath, value)](api.md#Josh+includes) ⇒ `boolean`
-    * [.some(pathOrFn, value)](api.md#Josh+some) ⇒ `boolean`
-    * [.every(pathOrFn, value)](api.md#Josh+every) ⇒ `boolean`
-    * [.math(keyOrPath, operation, operand, path)](api.md#Josh+math) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.autoId()](api.md#Josh+autoId) ⇒ `Promise.<string>`
-    * [.import(data, overwrite, clear)](api.md#Josh+import) ⇒ [`Promise.<Josh>`](api.md#Josh)
-    * [.export()](api.md#Josh+export) ⇒ `Promise.<string>`
-  * _static_
-    * [.multi(names, options)](api.md#Josh.multi) ⇒ `Array.<Map>`
-
 ### new Josh(\[options])
 
 Initializes a new Josh, with options.
