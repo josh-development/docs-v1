@@ -12,45 +12,6 @@ Every Josh Provider must contain a certain number of methods that will be called
 
 If your provider does not support a method, it should be present and throw an error indicating this fact.
 
-**Kind**: global class
-
-* [JoshProvider](creating-a-provider.md#JoshProvider)
-  * [new JoshProvider(\[options\])](creating-a-provider.md#new-joshprovider-options)
-  * [.init(Josh)](creating-a-provider.md#joshprovider-init-josh-promise) ⇒ `Promise`
-  * [.get(key, path)](creating-a-provider.md#joshprovider-get-key-path-promise-less-than-greater-than) ⇒ `Promise.<*>`
-  * [.getAll()](creating-a-provider.md#joshprovider-getall-promise-less-than-object-less-than-greater-than-greater-than) ⇒ `Promise.<Object.<*>>`
-  * [.getMany(keys)](creating-a-provider.md#joshprovider-getmany-keys-promise-less-than-object-less-than-greater-than-greater-than) ⇒ `Promise.<Object.<*>>`
-  * [.random(count)](creating-a-provider.md#joshprovider-random-count-promise-less-than-object-less-than-greater-than-greater-than) ⇒ `Promise.<Object.<*>>`
-  * [.randomKey(count)](creating-a-provider.md#joshprovider-randomkey-count-promise-less-than-array-less-than-string-greater-than-greater-than) ⇒ `Promise.<Array.<string>>`
-  * [.has(key, path)](creating-a-provider.md#joshprovider-has-key-path-promise-less-than-boolean-greater-than) ⇒ `Promise.<boolean>`
-  * [.keys()](creating-a-provider.md#joshprovider-keys-promise-less-than-array-less-than-string-greater-than-greater-than) ⇒ `Promise.<Array.<string>>`
-  * [.values()](creating-a-provider.md#joshprovider-values-promise-less-than-array-less-than-greater-than-greater-than) ⇒ `Promise.<array.<*>>`
-  * [.count()](creating-a-provider.md#joshprovider-count-promise-less-than-integer-greater-than) ⇒ `Promise.<integer>`
-  * [.set(key, path, val)](creating-a-provider.md#joshprovider-set-key-path-val-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.setMany(data, overwrite)](creating-a-provider.md#joshprovider-setmany-data-overwrite-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.delete(key, path)](creating-a-provider.md#joshprovider-delete-key-path-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.clear()](creating-a-provider.md#joshprovider-clear-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.push(key, path, value, allowDupes)](creating-a-provider.md#joshprovider-push-key-path-value-allowdupes-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.remove(key, path, val)](creating-a-provider.md#joshprovider-remove-key-path-val-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.inc(key, path)](creating-a-provider.md#joshprovider-inc-key-path-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.dec(key, path)](creating-a-provider.md#joshprovider-dec-key-path-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.math(key, path, operation, operand)](creating-a-provider.md#joshprovider-math-key-path-operation-operand-promise-less-than-provider-greater-than) ⇒ `Promise.<Provider>`
-  * [.findByFunction(fn, path)](creating-a-provider.md#joshprovider-findbyfunction-fn-path-promise-less-than-greater-than) ⇒ `Promise.<*>`
-  * [.findByValue(path, value)](creating-a-provider.md#joshprovider-findbyvalue-path-value-promise-less-than-greater-than) ⇒ `Promise.<*>`
-  * [.filterByFunction(fn, path)](creating-a-provider.md#joshprovider-filterbyfunction-fn-path-promise-less-than-object-greater-than) ⇒ `Promise.<Object>`
-  * [.filterByValue(path, value)](creating-a-provider.md#joshprovider-filterbyvalue-path-value-promise-less-than-object-greater-than) ⇒ `Promise.<Object>`
-  * [.mapByValue(path)](creating-a-provider.md#joshprovider-mapbyvalue-path-promise-less-than-array-less-than-string-greater-than-greater-than) ⇒ `Promise.<Array.<string>>`
-  * [.mapByFunction(fn)](creating-a-provider.md#joshprovider-mapbyfunction-fn-promise-less-than-array-less-than-greater-than-greater-than) ⇒ `Promise.<Array.<*>>`
-  * [.includes(key, path, val)](creating-a-provider.md#joshprovider-includes-key-path-val-promise-less-than-boolean-greater-than) ⇒ `Promise.<boolean>`
-  * [.someByPath(path, value)](creating-a-provider.md#joshprovider-somebypath-path-value-promise-less-than-boolean-greater-than) ⇒ `Promise.<boolean>`
-  * [.someByFunction(fn)](creating-a-provider.md#joshprovider-somebyfunction-fn-promise-less-than-boolean-greater-than) ⇒ `Promise.<boolean>`
-  * [.everyByPath(path, value)](creating-a-provider.md#joshprovider-everybypath-path-value-promise-less-than-boolean-greater-than) ⇒ `Promise.<boolean>`
-  * [.everyByFunction(fn)](creating-a-provider.md#joshprovider-everybyfunction-fn-promise-less-than-boolean-greater-than) ⇒ `Promise.<boolean>`
-  * [.close()](creating-a-provider.md#joshprovider-close)
-  * [.destroy()](creating-a-provider.md#joshprovider-destroy)
-  * [.autoId()](creating-a-provider.md#joshprovider-autoid-promise-less-than-string-greater-than) ⇒ `Promise.<string>`
-  * [.parseData(data)](creating-a-provider.md#joshprovider-parsedata-data) ⇒ `*`
-
 ### new JoshProvider(\[options])
 
 | Param           | Type     | Description                                                                                                                   |

@@ -3,6 +3,7 @@ output: .retype
 url: josh.evie.dev
 branding:
   logo:  assets/josh_p_light.svg
+favicon: assets/favicon.png
 links:
 - text: Github
   link: https://github.com/eslachance/josh
