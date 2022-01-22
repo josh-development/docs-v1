@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="turbo-cache-control" content="no-cache">
+
+    <!-- Primary Meta Tags -->
+    <title>Creating a Provider</title>
+    <meta name="title" content="Creating a Provider">
+    <meta name="description" content="So, you want to create your own provider? I'm too slow to make them, aren't I? Well, you're in luck, because I've made every attempt to document..." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://josh.evie.dev/development/creating-a-provider/">
+    <meta property="og:title" content="Creating a Provider">
+    <meta property="og:description" content="So, you want to create your own provider? I'm too slow to make them, aren't I? Well, you're in luck, because I've made every attempt to document...">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://josh.evie.dev/development/creating-a-provider/">
+    <meta property="twitter:title" content="Creating a Provider">
+    <meta property="twitter:description" content="So, you want to create your own provider? I'm too slow to make them, aren't I? Well, you're in luck, because I've made every attempt to document...">
+    
+    <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
+
+    <link href="/assets/favicon.png" rel="icon" />
+    <link href="/resources/css/retype.css?v=1.11.2.696139602975" rel="stylesheet" data-turbo-track="reload" />
+
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.696139602975" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.696139602975" defer></script>
+</head>
+    <body>
+        <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
+    <div class="absolute bottom-0 left-0 bg-gray-100 dark:bg-dark-800" style="top: 5rem; right: 50%"></div>
+
+    <header id="docs-site-header" class="sticky top-0 z-30 flex w-full h-16 bg-white border-b border-gray-200 md:h-20 dark:bg-dark-850 dark:border-dark-650">
+    <div class="container relative flex items-center justify-between flex-grow pr-6 md:justify-start">
+        <!-- Mobile menu button skeleton -->
+        <button v-cloak class="skeleton docs-mobile-menu-button flex items-center justify-center flex-shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px flex-shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+        <div v-cloak id="docs-sidebar-toggle"></div>
+
+        <!-- Logo -->
+        <div class="flex items-center justify-between h-full py-2 md:w-75">
+            <div class="flex items-center px-2 md:px-6">
+                <a id="docs-site-logo" href="/" class="flex items-center leading-snug text-2xl">
+                    <span class="flex-grow-0 flex-shrink-0 overflow-hidden">
+                        <img class="max-h-10 dark:hidden md:inline-block" src="/assets/josh_p_light.svg">
+                        <img class="max-h-10 hidden dark:inline-block" src="/assets/josh_p_light.svg">
+                    </span>
+                </a>
+            </div>
+
+            <span class="hidden h-8 border-r md:inline-block dark:border-dark-650"></span>
+        </div>
+
+        <div class="flex justify-between md:flex-grow">
+            <!-- Top Nav -->
+            <nav class="hidden md:flex">
+    <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="https://github.com/eslachance/josh">Github</a>
+        </li>
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="https://npmjs.com/package/@joshdb/core">NPM</a>
+        </li>
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="https://discord.gg/N7ZKH3P">Discord</a>
+        </li>
+    </ul>
+</nav>
+
+            <!-- Header Right Skeleton -->
+            <div v-cloak class="flex justify-end flex-grow skeleton">
+
+                <!-- Search input mock -->
+                <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                    <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation"  style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                    </div>
+
+                    <input class="w-full h-10 transition-colors duration-200 ease-in bg-gray-200 border border-transparent rounded md:text-sm hover:bg-white hover:border-gray-300 focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-dark-600 dark:border-dark-600 placeholder-gray-400 dark:placeholder-dark-400"
+                    style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search" />
+                </div>
+
+                <!-- Mobile search button mock -->
+                <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation"  style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                </div>
+
+                <!-- Dark mode switch placehokder -->
+                <div class="w-10 h-10 lg:ml-2"></div>
+
+                <!-- History button mock -->
+                <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation"  style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                </div>
+            </div>
+
+            <div v-cloak class="flex items-center justify-end flex-grow">
+                <div id="docs-mobile-search-button"></div>
+                <doc-search-desktop></doc-search-desktop>
+
+                <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                <doc-history></doc-history>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <div class="container relative flex bg-white">
+        <!-- Sidebar Skeleton -->
+<div v-cloak class="fixed flex flex-col flex-shrink-0 duration-300 ease-in-out bg-gray-100 border-gray-200 sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton dark:bg-dark-800 dark:border-dark-650">
+
+    <!-- Render this div, if config.showSidebarFilter is `true` -->
+    <div class="flex items-center h-16 px-6">
+        <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-white border border-gray-200 rounded shadow-none text-sm focus:outline-none focus:border-gray-600 dark:bg-dark-600 dark:border-dark-600" type="text" placeholder="Filter" />
+    </div>
+
+    <div class="pl-6 mb-4 mt-1">
+        <div class="w-32 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-48 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-40 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-32 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-48 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+        <div class="w-40 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+    </div>
+
+
+    <div class="flex-shrink-0 mt-auto bg-transparent dark:border-dark-650">
+        <a
+    class="flex items-center justify-center flex-nowrap h-16 text-gray-400 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by"
+    target="_blank"
+    href="https://retype.com/"
+    rel="noopener"
+>
+    <span class="text-xs whitespace-nowrap">Powered by</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+</a>
+
+    </div>
+</div>
+
+<!-- Sidebar component -->
+<doc-sidebar v-cloak>
+    <template #sidebar-footer>
+        <div
+            class="flex-shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-dark-650"
+        >
+
+            <div class="py-3 px-6 md:hidden border-b dark:border-dark-650">
+                <nav>
+                    <ul class="flex flex-wrap justify-center items-center">
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://github.com/eslachance/josh">Github</a>
+                        </li>
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://npmjs.com/package/@joshdb/core">NPM</a>
+                        </li>
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://discord.gg/N7ZKH3P">Discord</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+
+            <a
+    class="flex items-center justify-center flex-nowrap h-16 text-gray-400 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by"
+    target="_blank"
+    href="https://retype.com/"
+    rel="noopener"
+>
+    <span class="text-xs whitespace-nowrap">Powered by</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+</a>
+
+        </div>
+    </template>
+</doc-sidebar>
+
+
+        <div class="flex-grow min-w-0 dark:bg-dark-850">
+            <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+            <div class="flex">
+    <div class="flex-grow min-w-0 px-6 md:px-16">
+        <main class="relative pt-6 pb-16">
+            <div class="docs-markdown" id="docs-content">
+                <!-- Rendered if sidebar right is enabled -->
+                <div id="docs-sidebar-right-toggle"></div>
+               
+                <!-- Page content  -->
+<doc-anchor-target id="creating-a-provider" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#creating-a-provider">#</doc-anchor-trigger>
+        <span>Creating a Provider</span>
+    </h1>
+</doc-anchor-target>
+<p>So, you want to create your own provider? I&#x27;m too slow to make them, aren&#x27;t I? Well, you&#x27;re in luck, because I&#x27;ve made every attempt to document what&#x27;s required for new providers to be built. Specifically, below is a list of methods that they need to support.</p>
+<p>For examples of how these methods might work, please look at <a href="https://github.com/eslachance/josh-providers/">existing providers</a> and their code. If you can make those methods more efficient or performant using core features of your database then by all means, feel free to do so! But, they must return the data in the format described in the code.</p>
+<p>Note that the documentation below doesn&#x27;t include example return values, but <a href="https://github.com/eslachance/josh-providers/docs/base_provider.js">the source code does</a>.</p>
+<doc-anchor-target id="joshprovider-api">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovider-api">#</doc-anchor-trigger>
+        <span>JoshProvider API</span>
+    </h2>
+</doc-anchor-target>
+<p>Every Josh Provider must contain a certain number of methods that will be called by the main Josh code.</p>
+<p>If your provider does not support a method, it should be present and throw an error indicating this fact.</p>
+<doc-anchor-target id="new-joshprovideroptions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#new-joshprovideroptions">#</doc-anchor-trigger>
+        <span>new JoshProvider([options])</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[options]</td>
+<td><code v-pre>Object</code></td>
+<td>An object containing all the options required for your provider, as well as the ones provided by default with every provider.</td>
+</tr>
+<tr>
+<td>[options.name]</td>
+<td><code v-pre>string</code></td>
+<td>Required. The name of the table in which to save the data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderinitjosh--promise">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderinitjosh--promise">#</doc-anchor-trigger>
+        <span>joshProvider.init(Josh) ⇒ <code v-pre>Promise</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Internal method called on persistent Josh to load data from the underlying database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise</code> - Returns the defer promise to await the ready state.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Josh</td>
+<td><code v-pre>Map</code></td>
+<td>In order to set data to the Josh, one must be provided.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidergetkey-path--promise">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidergetkey-path--promise">#</doc-anchor-trigger>
+        <span>joshProvider.get(key, path) ⇒ <code v-pre>Promise.&lt;*&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieves a single value from the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;*&gt;</code> - The data stored for the key, or at the path.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The database key where the value is stored</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. The path within the key where the object is located. The path must support the same syntax as lodash does, for example: &#x27;a[0].b.c&#x27;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidergetall--promiseobject">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidergetall--promiseobject">#</doc-anchor-trigger>
+        <span>joshProvider.getAll() ⇒ <code v-pre>Promise.&lt;Object.&lt;*&gt;&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Retrieves all values from the database.</li>
+</ul>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Object.&lt;*&gt;&gt;</code> - An object consisting of every key and value in the database. At the top level, the key is what the user providers when using set(key, value) and the value in the object is whatever&#x27;s in the database. Every value should be parsed using <code v-pre>this.parseData()</code>\</p>
+<doc-anchor-target id="joshprovidergetmanykeys--promiseobject">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidergetmanykeys--promiseobject">#</doc-anchor-trigger>
+        <span>joshProvider.getMany(keys) ⇒ <code v-pre>Promise.&lt;Object.&lt;*&gt;&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieves one or many values from the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Object.&lt;*&gt;&gt;</code> - An object consisting every key requested by the user, and its value in the datbase. At the top level, the key is what the user providers when using set(key, value) and the value in the object is whatever&#x27;s in the database. Every value should be parsed using <code v-pre>this.parseData()</code></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keys</td>
+<td><code v-pre>Array.&lt;string&gt;</code></td>
+<td>A list of keys to retrieve from the database.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderrandomcount--promiseobject">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderrandomcount--promiseobject">#</doc-anchor-trigger>
+        <span>joshProvider.random(count) ⇒ <code v-pre>Promise.&lt;Object.&lt;*&gt;&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieves one or more random values from the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Object.&lt;*&gt;&gt;</code> - An object representing one or more random keys taken from the database, with their values. At the top level, the key is what the user providers when using set(key, value) and the value in the object is whatever&#x27;s in the database. Every value should be parsed using <code v-pre>this.parseData()</code></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td><code v-pre>Number</code></td>
+<td><code v-pre>1</code></td>
+<td>An integer representing the number of random values to obtain from the database.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderrandomkeycount--promisearraystring">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderrandomkeycount--promisearraystring">#</doc-anchor-trigger>
+        <span>joshProvider.randomKey(count) ⇒ <code v-pre>Promise.&lt;Array.&lt;string&gt;&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieves a random key from all the database keys for this Josh.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Array.&lt;string&gt;&gt;</code> - An array of random keys taken from the database, or a single key if count is 1.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td><code v-pre>Number</code></td>
+<td><code v-pre>1</code></td>
+<td>An integer representing the number of random keys to obtain from the database.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderhaskey-path--promiseboolean">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderhaskey-path--promiseboolean">#</doc-anchor-trigger>
+        <span>joshProvider.has(key, path) ⇒ <code v-pre>Promise.&lt;boolean&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Verifies whether a key, or value at path, exists in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;boolean&gt;</code> - Whether the key (or value at path) exists.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The key of which the existence should be checked.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. If provided, should return whether a value exists at that path, assuming the key exists.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderkeys--promisearraystring">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderkeys--promisearraystring">#</doc-anchor-trigger>
+        <span>joshProvider.keys() ⇒ <code v-pre>Promise.&lt;Array.&lt;string&gt;&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieves all the indexes (keys) in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Array.&lt;string&gt;&gt;</code> - Array of all indexes (keys) in the database.\</p>
+<doc-anchor-target id="joshprovidervalues--promisearray">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidervalues--promisearray">#</doc-anchor-trigger>
+        <span>joshProvider.values() ⇒ <code v-pre>Promise.&lt;array.&lt;*&gt;&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieves all of the values in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger>\</p>
+<doc-anchor-target id="joshprovidercount--promiseinteger">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidercount--promiseinteger">#</doc-anchor-trigger>
+        <span>joshProvider.count() ⇒ <code v-pre>Promise.&lt;integer&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieves the number of rows in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;integer&gt;</code> - The number of rows in the database.\</p>
+<doc-anchor-target id="joshprovidersetkey-path-val--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidersetkey-path-val--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.set(key, path, val) ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Saves a key in the database, along with its value.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The name of the key. If the key already exists, the value should be overriden.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. Defines where, in an object or array value, to place the provided data.</td>
+</tr>
+<tr>
+<td>val</td>
+<td><code v-pre>*</code></td>
+<td>The data to write in the database for the key, or at the path for this key. This value MUST be written using serialize-javascript</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidersetmanydata-overwrite--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidersetmanydata-overwrite--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.setMany(data, overwrite) ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Writes many different keys and their values to the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td><code v-pre>Object</code></td>
+<td>The data to write to the database. Should be an object where each property is a key and its value is the value to write. Does not support writing with paths. Format is: <code v-pre>json {   key1: 'value1',   key2: 'value2', }</code></td>
+</tr>
+<tr>
+<td>overwrite</td>
+<td><code v-pre>boolean</code></td>
+<td>Whether to overwrite existing keys provided in the incoming data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderdeletekey-path--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderdeletekey-path--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.delete(key, path) ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Deletes a key and its value, or the part of an object or array value, from the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The name of the key to remove, or <em>from</em> which value to remove data at the path.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. The path that should be deleted, if one is provided. Ideally, this could use <code v-pre>unset()</code> from lodash.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderclear--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderclear--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.clear() ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Deletes every single entry in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.\</p>
+<doc-anchor-target id="joshproviderpushkey-path-value-allowdupes--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderpushkey-path-value-allowdupes--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.push(key, path, value, allowDupes) ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Pushes a new value into an array stored in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The key where to push a new value. The key&#x27;s value must be an array (unless a path is used, then it should be an object).</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. If provided, the value at that path should be an array.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code v-pre>*</code></td>
+<td>The value to push into the array.</td>
+</tr>
+<tr>
+<td>allowDupes</td>
+<td><code v-pre>boolean</code></td>
+<td>Whether to allow duplicates to be pushed into the array. If true, should not ... well... allow duplicates.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderremovekey-path-val--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderremovekey-path-val--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.remove(key, path, val) ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Removes a value from an array stored in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The key where to remove a value from. The key&#x27;s value must be an array (unless a path is used).</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. If provider, the value at that path should be an array.</td>
+</tr>
+<tr>
+<td>val</td>
+<td><code v-pre>*</code> | <code v-pre>function</code></td>
+<td>The value to remove from the array, or a function provided by the user to remove from the array (using findIndex).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderinckey-path--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderinckey-path--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.inc(key, path) ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Increments a numerical value within the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The key to increment. The value must be a Number.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. If provided, the value at that path must be a Number value.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderdeckey-path--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderdeckey-path--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.dec(key, path) ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Decrements a numerical value within the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The key to decrement. The value must be a Number.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. If provided, the value at that path must be a Number value.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidermathkey-path-operation-operand--promiseprovider">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidermathkey-path-operation-operand--promiseprovider">#</doc-anchor-trigger>
+        <span>joshProvider.math(key, path, operation, operand) ⇒ <code v-pre>Promise.&lt;Provider&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Executes a mathematical operation on a numerical value within the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Provider&gt;</code> - This provider.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The key where the operation should be executed. The value must be a Number value.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. If provided, the value at the path must be a Number value.</td>
+</tr>
+<tr>
+<td>operation</td>
+<td><code v-pre>string</code></td>
+<td>One of the supported operations (listed in this function).</td>
+</tr>
+<tr>
+<td>operand</td>
+<td><code v-pre>Number</code></td>
+<td>The secondary Number for the mathematical operation.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderfindbyfunctionfn-path--promise">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderfindbyfunctionfn-path--promise">#</doc-anchor-trigger>
+        <span>joshProvider.findByFunction(fn, path) ⇒ <code v-pre>Promise.&lt;*&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Finds and returns a value using a function.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;*&gt;</code> - The first value found by the function, or <code v-pre>null</code> if no value found.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fn</td>
+<td><code v-pre>function</code></td>
+<td>A function to execute on every value in the database. This function should provide both the <code v-pre>value</code> and <code v-pre>key</code> as arguments and will return a boolean. findByFunction should support asynchronous functions (the <code v-pre>fn</code> return could be a promise that requires resolution)</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. If provided, the function should be provided the value at the path rather than at the root.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderfindbyvaluepath-value--promise">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderfindbyvaluepath-value--promise">#</doc-anchor-trigger>
+        <span>joshProvider.findByValue(path, value) ⇒ <code v-pre>Promise.&lt;*&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Finds and returns an entire value, by checking whether a specific sub-value was found a the given path.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;*&gt;</code> - The first value found, or <code v-pre>null</code> if no value found.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>The path where to check if the value is present</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code v-pre>*</code></td>
+<td>The value to check for equality.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderfilterbyfunctionfn-path--promiseobject">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderfilterbyfunctionfn-path--promiseobject">#</doc-anchor-trigger>
+        <span>joshProvider.filterByFunction(fn, path) ⇒ <code v-pre>Promise.&lt;Object&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Finds and returns one or more values using a function to check whether the value is desired.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Object&gt;</code> - The values found by the function, or <code v-pre>{}</code> if no value found.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fn</td>
+<td><code v-pre>function</code></td>
+<td>A function to execute on every value in the database. This function should be provided both the <code v-pre>value</code> and <code v-pre>key</code> as arguments and will return a boolean. filterByFunction should support asynchronous functions (the <code v-pre>fn</code> return could be a promise that requires resolution)</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>The path where to check if the value is present</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderfilterbyvaluepath-value--promiseobject">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderfilterbyvaluepath-value--promiseobject">#</doc-anchor-trigger>
+        <span>joshProvider.filterByValue(path, value) ⇒ <code v-pre>Promise.&lt;Object&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Finds and returns one or move value, by checking whether a specific sub-value was found at the given path.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Object&gt;</code> - The values found by this function, or <code v-pre>{}</code> if no value found.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>The path where to check if the value is present</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code v-pre>*</code></td>
+<td>The value to check for equality.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidermapbyvaluepath--promisearraystring">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidermapbyvaluepath--promisearraystring">#</doc-anchor-trigger>
+        <span>joshProvider.mapByValue(path) ⇒ <code v-pre>Promise.&lt;Array.&lt;string&gt;&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Retrieves the value at the specified path for every stored object or array in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Array.&lt;string&gt;&gt;</code> - An array of the values at that path</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>The path to get the data from.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidermapbyfunctionfn--promisearray">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidermapbyfunctionfn--promisearray">#</doc-anchor-trigger>
+        <span>joshProvider.mapByFunction(fn) ⇒ <code v-pre>Promise.&lt;Array.&lt;*&gt;&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Runs a function for every value in the database and returns an array with the return of that function for each value.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;Array.&lt;*&gt;&gt;</code> - An array of the values returned by the function for each value.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fn</td>
+<td><code v-pre>function</code></td>
+<td>The function should be provided the <code v-pre>key</code> and <code v-pre>value</code> as arguments (in that order) and will return a value. mapByFunction should support asynchronous functions (the <code v-pre>fn</code> return could be a promise that requires resolution)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderincludeskey-path-val--promiseboolean">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderincludeskey-path-val--promiseboolean">#</doc-anchor-trigger>
+        <span>joshProvider.includes(key, path, val) ⇒ <code v-pre>Promise.&lt;boolean&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Verifies if a value is part of an array at the key (or the path within that key).</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;boolean&gt;</code> - Whether the value is in the array.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td><code v-pre>string</code></td>
+<td>The key in which to verify the existence of the value. Should be an array, unless a path is used.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. Value at this path is expected to be an array.</td>
+</tr>
+<tr>
+<td>val</td>
+<td><code v-pre>*</code></td>
+<td>The value to check in the array.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidersomebypathpath-value--promiseboolean">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidersomebypathpath-value--promiseboolean">#</doc-anchor-trigger>
+        <span>joshProvider.someByPath(path, value) ⇒ <code v-pre>Promise.&lt;boolean&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Verifies if the provided value is located in <em>any</em> of the values stored in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;boolean&gt;</code> - Should return true as soon as the value is found, or false if it hasn&#x27;t been.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>Optional. Null if not provided by the user. If provided, the value would need to be equal to the data stored at that path.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code v-pre>*</code></td>
+<td>The value to check for at that path.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidersomebyfunctionfn--promiseboolean">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidersomebyfunctionfn--promiseboolean">#</doc-anchor-trigger>
+        <span>joshProvider.someByFunction(fn) ⇒ <code v-pre>Promise.&lt;boolean&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Verifies if something is true in any of the values stored in the database, through a function.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;boolean&gt;</code> - Whether the <code v-pre>fn</code> has returned true for any value.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fn</td>
+<td><code v-pre>function</code></td>
+<td>The function should be provided both the <code v-pre>value</code> and <code v-pre>key</code> for each entry in the database, and will return a boolean. someByFunction is expected to return <code v-pre>true</code> immediately on the first occurence of the <code v-pre>fn</code> returning true. someByFunction should support asynchronous functions (the <code v-pre>fn</code> return could be a promise that requires resolution)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidereverybypathpath-value--promiseboolean">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidereverybypathpath-value--promiseboolean">#</doc-anchor-trigger>
+        <span>joshProvider.everyByPath(path, value) ⇒ <code v-pre>Promise.&lt;boolean&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Verifies if a value at a path is identical to the one provided, for every single value stored in the database.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;boolean&gt;</code> - Whether the value was equal to the one at the path for every single value in the database.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><code v-pre>string</code></td>
+<td>The path where the value should be checked.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code v-pre>*</code></td>
+<td>The value that should be checked for equality at that path.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshprovidereverybyfunctionfn--promiseboolean">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshprovidereverybyfunctionfn--promiseboolean">#</doc-anchor-trigger>
+        <span>joshProvider.everyByFunction(fn) ⇒ <code v-pre>Promise.&lt;boolean&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Verifies if a condition is true on every single value stored in the database, using a function.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;boolean&gt;</code> - Whether the <code v-pre>fn</code> has returned true for every value.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fn</td>
+<td><code v-pre>function</code></td>
+<td>The function should be provided botht he <code v-pre>value</code> and <code v-pre>key</code> for each entry in the database, and will return a boolean. everyByFunction should support asynchronous functions (the <code v-pre>fn</code> return could be a promise that requires resolution)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="joshproviderclose">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderclose">#</doc-anchor-trigger>
+        <span>joshProvider.close()</span>
+    </h3>
+</doc-anchor-target>
+<p>Closes the database. This function should be used to shut down any connection or file access to the database this provider refers to.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger>\</p>
+<doc-anchor-target id="joshproviderdestroy">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderdestroy">#</doc-anchor-trigger>
+        <span>joshProvider.destroy()</span>
+    </h3>
+</doc-anchor-target>
+<p>Deletes the database. This function should delete everything in the specific table used by this database (for the josh&#x27;s <strong>name</strong> specifically) It should also remove any temporary table, as well as the &quot;autoid&quot; saved for it. After this method is run, no trace of the specific josh should exist.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger>\</p>
+<doc-anchor-target id="joshproviderautoid--promisestring">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderautoid--promisestring">#</doc-anchor-trigger>
+        <span>joshProvider.autoId() ⇒ <code v-pre>Promise.&lt;string&gt;</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Returns the &quot;next&quot; automatic ID for this josh. AutoId should be a string, and can technically be anything you want - either a numerically incremented value or just an automatic row ID or DB ID (autonum, mongo&#x27;s _id , etc). No 2 Ids should ever be identical.</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>Promise.&lt;string&gt;</code> - An automatic ID.\</p>
+<doc-anchor-target id="joshproviderparsedatadata--">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#joshproviderparsedatadata--">#</doc-anchor-trigger>
+        <span>joshProvider.parseData(data) ⇒ <code v-pre>*</code></span>
+    </h3>
+</doc-anchor-target>
+<p>Internal method to read data from the database. This is essentially the contrary of <code v-pre>serialize-javascript</code>&#x27;s &quot;serialize()&quot; method. Note: EVAL IS NORMAL. As long as 100% of the data you read from this has been written by serialize(), this is SAFE. If you have any doubts as to what data has been written, or if you have to deal with mixed or unsafe data, then you should take further action to ensure you are not subject to security breaches!</p>
+<p><strong>Kind</strong>: instance method of <doc-anchor-trigger to="#joshprovider"><code v-pre>JoshProvider</code></doc-anchor-trigger><br />
+<strong>Returns</strong>: <code v-pre>*</code> - A value parsed through eval, which will be valid javascript.</p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td><code v-pre>string</code></td>
+<td>A string (&quot;JSON&quot;) generated by <code v-pre>serialize-javascript</code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+                <!-- Required only on API pages -->
+                <doc-toolbar-member-filter-no-results />
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between mt-14">
+    <a class="my-2.5 inline-flex items-center text-sm whitespace-nowrap text-blue-500 dark:text-blue-400 hover:text-blue-700 hover:underline" href="https://github.com/josh-development/josh.github.io/edit/main/development/creating-a-provider.md" target="_blank" rel="noopener">
+        <svg class="mr-1.5" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M20 12c-.55 0-1 .45-1 1v7c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h7c.55 0 1-.45 1-1s-.45-1-1-1H4C2.35 3 1 4.35 1 6v14c0 1.65 1.35 3 3 3h14c1.65 0 3-1.35 3-3v-7c0-.55-.45-1-1-1z" /><path d="M22.21 1.79c-1.18-1.18-3.24-1.18-4.41 0l-9.5 9.5c-.13.13-.22.29-.26.46l-1 4c-.08.34.01.7.26.95.18.2.44.3.7.3.08 0 .16-.01.24-.03l4-1c.18-.04.34-.13.46-.26l9.5-9.5c1.22-1.22 1.22-3.2.01-4.42zm-1.42 3l-9.3 9.3-2.11.53.53-2.11 9.3-9.3c.42-.42 1.16-.42 1.59 0 .43.43.43 1.15-.01 1.58z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+        <span>Edit this page</span>
+    </a>
+
+    <!--<p class="my-2.5 text-gray-500 dark:text-dark-350 text-sm">Last updated on <strong>2021-03-14</strong> by <strong>Geoffrey McGill</strong></p>-->
+</div>
+
+<nav class="flex mt-14">
+    <div class="w-1/2">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/development/contributing/">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+            <span>
+                <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
+                <span class="block mt-1">Contributing</span>
+            </span>
+        </a>
+    </div>
+
+    <div class="w-1/2">
+    </div>
+</nav>
+
+
+        </main>
+
+        <div class="border-t dark:border-dark-650 pt-6 mb-8">
+            <footer class="flex flex-wrap items-center justify-between">
+    <div>
+        <ul class="flex flex-wrap items-center text-sm">
+</ul>
+
+    </div>
+    <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2022. All rights reserved.</p>
+</div>
+</footer>
+
+        </div>
+    </div>
+    
+    <!-- Rendered if sidebar right is enabled -->
+    <!-- Sidebar right skeleton-->
+    <div v-cloak class="fixed top-0 bottom-0 right-0 transform translate-x-full bg-white border-gray-200 lg:sticky lg:border-l lg:flex-shrink-0 lg:pt-6 lg:transform-none lg:w-56 lg:z-0 md:w-72 sidebar-right skeleton dark:bg-dark-850 dark:border-dark-650">
+        <div class="pl-5">
+            <div class="w-32 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+            <div class="w-48 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+            <div class="w-40 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+        </div>
+    </div>
+    
+    <!-- User should be able to hide sidebar right -->
+    <doc-sidebar-right v-cloak></doc-sidebar-right>
+</div>
+
+        </div>
+    </div>
+
+    <doc-search-mobile></doc-search-mobile>
+    <doc-back-to-top></doc-back-to-top>
+</div>
+
+
+        <div id="docs-overlay-target"></div>
+
+        <script>window.__DOCS__ = { "title": "Creating a Provider", icon: "file", hasPrism: false, hasMermaid: false, hasMath: false }</script>
+    </body>
+</html>
