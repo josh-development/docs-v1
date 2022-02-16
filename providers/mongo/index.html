@@ -25,12 +25,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/assets/favicon.png" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.696139602975" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.698328686815" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.696139602975" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.698328686815" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.696139602975" defer></script>
-    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.696139602975" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.698328686815" defer></script>
+    <script id="prism-js" type="text/javascript" src="/resources/js/prism.js?v=1.11.2.698328686815" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -305,7 +305,7 @@ db.defer.then( () =&gt; {
 <p>The setup for Mongo Atlas goes something like this:</p>
 <ul>
 <li>Get an account at <a href="https://www.mongodb.com/cloud/atlas">mongodb.com</a></li>
-<li>Once created, setup your cluster: 
+<li>Once created, setup your cluster:
 <ul>
 <li>Provider &amp; Region: Up to you, I chose AWS in my test (but you might have a closer free region!). Make sure to select a &quot;FREE TIER AVAILABLE&quot; region!</li>
 <li>Keep the M0 cluster tier (the only free one). You may select backups if you want, other additional options are paid.</li>
@@ -316,7 +316,7 @@ db.defer.then( () =&gt; {
 <li>Click Create Database. Enter a name such as <code v-pre>guidebot-session</code> then a collection name such as <code v-pre>sessions</code>.</li>
 </ul>
 </li>
-<li>Now that the cluster is created, we now need to get a connection string. But we need to create a user, which there&#x27;s a wizard for. 
+<li>Now that the cluster is created, we now need to get a connection string. But we need to create a user, which there&#x27;s a wizard for.
 <ul>
 <li>Click <strong>Command Line Tools</strong> at the top of the cluster window, then click <strong>Connect Instructions</strong>.</li>
 <li>Click <strong>Add your Current IP</strong> if you&#x27;re on the machine that will host your bot. Otherwise, click <strong>Add a Different IP Address</strong> and enter it on the left. Click <strong>Add IP Address</strong>.</li>

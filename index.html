@@ -27,11 +27,11 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/assets/favicon.png" rel="icon" />
-    <link href="/resources/css/retype.css?v=1.11.2.696139602975" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/resources/css/retype.css?v=1.11.2.698328686815" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.696139602975" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/resources/js/config.js?v=1.11.2.698328686815" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.696139602975" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/resources/js/lunr.js?v=1.11.2.698328686815" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -205,14 +205,14 @@
     <figcaption class="caption">Credits: See bottom of page</figcaption>
 </figure>
 </p>
-<p>JOSH is the JavaScript Object Storage Helper - a simple, effective, and efficient database wrapper. The idea of JOSH came out of my existing wrapper, Enmap, which suffers from two very unique but important flaws: </p>
+<p>JOSH is the JavaScript Object Storage Helper - a simple, effective, and efficient database wrapper. The idea of JOSH came out of my existing wrapper, Enmap, which suffers from two very unique but important flaws:</p>
 <ul>
 <li>It cannot scale very well, being locked to better-sqlite3 which doesn&#x27;t support live data updates</li>
-<li>It requires the use of a cache, since most of its features, as used by most people, require the cache to be available. </li>
+<li>It requires the use of a cache, since most of its features, as used by most people, require the cache to be available.</li>
 </ul>
-<p>JOSH intends to solve both those problems that can&#x27;t actually be resolved in Enmap itself, by moving away from the synchronous nature of better-sqlite3 and using <a href="https://js.evie.dev/promises">Promises</a>. In this way, JOSH can keep most of Enmap&#x27;s features but add on a whole lot more. </p>
-<p>Now that this history lesson is done, what exactly <em>is</em> JOSH except being a contrast to something I&#x27;ve already done? </p>
-<p>JOSH is a promise-based database wrapper that assists in quick prototyping and rapid development of Node.js applications that require data storage. It aims at removing some of the complexity of database management and communication by providing a <em>simple</em> interface that anyone can pick up and use. </p>
+<p>JOSH intends to solve both those problems that can&#x27;t actually be resolved in Enmap itself, by moving away from the synchronous nature of better-sqlite3 and using <a href="https://js.evie.dev/promises">Promises</a>. In this way, JOSH can keep most of Enmap&#x27;s features but add on a whole lot more.</p>
+<p>Now that this history lesson is done, what exactly <em>is</em> JOSH except being a contrast to something I&#x27;ve already done?</p>
+<p>JOSH is a promise-based database wrapper that assists in quick prototyping and rapid development of Node.js applications that require data storage. It aims at removing some of the complexity of database management and communication by providing a <em>simple</em> interface that anyone can pick up and use.</p>
 <p>JOSH can communicate with many different database systems through the use of <em>Providers</em>, which are a translation layer between the JOSH API and the Database system.</p>
 <p>JOSH is <em>not an ORM</em> , in the sense that it does not handle either models or relationships. In fact, I personally do not like ORMs at all due to their inherent complexity, so don&#x27;t expect those features here!</p>
 <p>_Logo Credits: _<a href="https://github.com/cal3432">_CyaCal _</a><em>and <em><a href="https://github.com/GlitchyPSIX"><em>GlitchyPSIX</em></a></em></em></p>
