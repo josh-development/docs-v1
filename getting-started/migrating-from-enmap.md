@@ -6,13 +6,13 @@ description: >-
 
 # Migrating from Enmap
 
-While Josh and Enmap are based on the same basic concepts and ideas, there are some changes that will need to happen in your code if you want to move from Enmap to Josh.&#x20;
+While Josh and Enmap are based on the same basic concepts and ideas, there are some changes that will need to happen in your code if you want to move from Enmap to Josh.
 
 A few decisions I made here and there mean that unfortunately, almost all lines related to your database interactions will need to be changed one way or another, so before we start, I apologize from the bottom of my heart that this isn't as straightforward as "change a few lines and import the data". The significant work you'll have to do to convert is entirely my fault, so make sure that you _need_ to move to Josh before you start, otherwise, you're just adding pain onto yourself and I can't take all the blame for that.
 
 ## Why Migrate?
 
-First off: you shouldn't just migrate from Enmap to Josh "just because Josh is newer". Josh isn't an _upgrade_ to Enmap, it's a different module altogether which offers only a few very clear benefit and two downsides that might not be worth it for you.&#x20;
+First off: you shouldn't just migrate from Enmap to Josh "just because Josh is newer". Josh isn't an _upgrade_ to Enmap, it's a different module altogether which offers only a few very clear benefit and two downsides that might not be worth it for you.
 
 The first reason why you _should_ migrate, is if you need to access your data from more than one process. For example, if you need to shard a discord.js bot, or if you want a dashboard separated from the bot itself. Or, if you simply have more than one app accessing the same database. Since Enmap doesn't do that (well, it "does" with polling but it's pretty crappy at it), going to Josh is a valid solution.
 
@@ -20,7 +20,7 @@ The second reason you'd want to migrate is if you want to move away from SQLite 
 
 ## Before you migrate
 
-So before you get into this, I would very strongly recommend you get very comfortable with the use of promises. Thing is, where Enmap doesn't use promises at all except for the defer option (which you usually don't need except for specific circumstances), Josh is quite the contrary: _Everything Is Promises_. So, if you don't understand async/await or how to resolve promises you're going to have a bad time.&#x20;
+So before you get into this, I would very strongly recommend you get very comfortable with the use of promises. Thing is, where Enmap doesn't use promises at all except for the defer option (which you usually don't need except for specific circumstances), Josh is quite the contrary: _Everything Is Promises_. So, if you don't understand async/await or how to resolve promises you're going to have a bad time.
 
 [The Promise page on my JS guide](https://js.evie.dev/promises) should cover most of the concepts required for you to use Josh so go through that page and then come back. I suggest using async/await whenever possible, and that's how I build all my examples and documentation.
 
@@ -28,11 +28,11 @@ _**MAKE A BACKUP OF YOUR PROJECT NOW**_. If you're using GIT that's simple, just
 
 ## Step 1: Installation
 
-The TL;DR of the Installation page is that you just need to run `npm i josh@latest` or `yarn add josh@latest` in your project to get Josh itself. You can simply do this in your project folder, because we can do all this within that folder without losing any data.&#x20;
+The TL;DR of the Installation page is that you just need to run `npm i @joshdb/core` or `yarn add @joshdb/core` in your project to get Josh itself. You can simply do this in your project folder, because we can do all this within that folder without losing any data.
 
-Then, you choose a provider and you install that, too, with its pre-requisites. In this example we're going for the SQLite provider, but the instructions should be identical for all of them except for the provider name. So in our case, with the windows-build-tools already installed (because you're using Enmap, you have those already!) we can just `npm i @josh-providers/sqlite` or `yarn add @josh-providers@sqlite` to add it.&#x20;
+Then, you choose a provider and you install that, too, with its pre-requisites. In this example we're going for the SQLite provider, but the instructions should be identical for all of them except for the provider name. So in our case, with the windows-build-tools already installed (because you're using Enmap, you have those already!) we can just `npm i @joshdb/sqlite` or `yarn add @joshdb/sqlite` to add it.
 
-With those 2 modules added we can continue on to the migration itself. DO NOT DELETE OR UNINSTALL ENMAP OR ITS DATA YET, obviously.
+With those 2 modules added we can continue on to the migration itself. DO NOT DELETE OR UNINSTALL ENMAP OR ITS DATA YET.
 
 ## Step 2: Migration
 
@@ -65,7 +65,6 @@ const target = new Josh({
 // so we're going to do that with an async IIFE to simplify things.
 // An IIFE is just a function that runs immediately, in this case an async one.
 (async () => {
-  await source.defer;
   console.log(`Loaded Enmap with ${source.count} rows to transfer`);
   console.log(`Target JOSH currently has ${await target.size} rows.`);
   
@@ -83,19 +82,19 @@ Now that the data is completely migrated, we're ready to move on. To verify that
 
 ## Step 3: Changing your Code
 
-Now comes the hard part. You'll need to change your entire code for Josh. This includes every single line where you're getting, setting, or modifying the database. But, there are some general guidelines that will clarify exactly what changes need to be made.&#x20;
+Now comes the hard part. You'll need to change your entire code for Josh. This includes every single line where you're getting, setting, or modifying the database. But, there are some general guidelines that will clarify exactly what changes need to be made.
 
 The Initialization
 
-This is an easy one: the initialization for Josh is exactly what you used above in the migration script. You import Josh, the Provider, then you initialize it with the new Josh() line.&#x20;
+This is an easy one: the initialization for Josh is exactly what you used above in the migration script. You import Josh, the Provider, then you initialize it with the new Josh() line.
 
 > There is currently no multi() method in Josh, this is in the works, though! For now each instance must be initialized separately.
 
 ### The Key/Path system
 
-In Josh, there is no separate "key" and "path" when it comes to arguments. Basically I realized that with the various arguments between functions, it sometimes was vague or confusing what went where. To simplify this, it's now a single argument that starts each method where a key and/or path is necessary.&#x20;
+In Josh, there is no separate "key" and "path" when it comes to arguments. Basically I realized that with the various arguments between functions, it sometimes was vague or confusing what went where. To simplify this, it's now a single argument that starts each method where a key and/or path is necessary.
 
-So, the new system works as a single string, where each part is separated by a dot to indicate a level in the object. Let's see an example with set() first, to, errr, "set the table" as it were.&#x20;
+So, the new system works as a single string, where each part is separated by a dot to indicate a level in the object. Let's see an example with set() first, to, errr, "set the table" as it were.
 
 ```javascript
 // In Enmap, you did this: 
@@ -113,7 +112,7 @@ await josh.set("somekey.a", "one");
 
 If you need to access a property that's nested in another level, you can just chain the path exactly as you would have in Enmap, so `await josh.set("somekey.a.foo.bar", "newvalue")` would set at the 3rd level of the object.
 
-Every other method will have the same tweak, from push() and remove() in arrays to get() and has() and all these wonderful things.&#x20;
+Every other method will have the same tweak, from push() and remove() in arrays to get() and has() and all these wonderful things.
 
 {% hint style="info" %}
 Since the key/path is a string you can use template literals for variables. For example, in a per-server settings context:
@@ -125,7 +124,7 @@ await client.settings.get(`${message.guild.id}.disabledCommands`);
 
 ### Find, Filter and other loops
 
-Because Josh is not cached in memory, there are a few little changes to the way array methods work. First and foremost it's important to know that for most providers, using the looping methods will cause a significant increase in temporary memory usage (because data still needs to be loaded in memory to be processed in most cases), and using a _path_ rather than a function is going to always be much faster and efficient. In fact, for providers supporting JSON data types (rethink, mongo, postgresql), using path equality means no data is loaded in memory, it's all database-processed and is faster by an order of magnitude.&#x20;
+Because Josh is not cached in memory, there are a few little changes to the way array methods work. First and foremost it's important to know that for most providers, using the looping methods will cause a significant increase in temporary memory usage (because data still needs to be loaded in memory to be processed in most cases), and using a _path_ rather than a function is going to always be much faster and efficient. In fact, for providers supporting JSON data types (rethink, mongo, postgresql), using path equality means no data is loaded in memory, it's all database-processed and is faster by an order of magnitude.
 
 {% hint style="info" %}
 Josh support async functions for find(), filter() and some(). However, they will be slower due to "whatever async thing you're doing".

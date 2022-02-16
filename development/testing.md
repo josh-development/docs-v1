@@ -1,12 +1,12 @@
 # Testing Stuff
 
-If you feel the need to "test" JOSH's functionality from a command line, you're not alone, because I do to! That's why I created a very simple script that lets me directly import and interact with JOSH from the command line. That way I can set, get, delete, and do all the things without having to restart a script every time.&#x20;
+If you feel the need to "test" JOSH's functionality from a command line, you're not alone, because I do to! That's why I created a very simple script that lets me directly import and interact with JOSH from the command line. That way I can set, get, delete, and do all the things without having to restart a script every time.
 
-The script uses a simple `readline` module that's core to node, so really the only thing it needs to run is `josh` itself, and a provider such as `@josh-providers/sqlite` .&#x20;
+The script uses a simple `readline` module that's core to node, so really the only thing it needs to run is `josh` itself, and a provider such as `@josh-providers/sqlite` .
 
 You'll need to install the appropriate provider, see [Providers ](../providers/about.md)for instructions.
 
-Here's the script:&#x20;
+Here's the script:
 
 ```javascript
 const readline = require('readline');

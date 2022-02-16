@@ -1,6 +1,6 @@
 # Basic Usage
 
-\[ TBD ] - Documentation isn't yet ready fully but here's a few examples:&#x20;
+\[ TBD ] - Documentation isn't yet ready fully but here's a few examples:
 
 ```javascript
 const Josh = require("@joshdb/core");

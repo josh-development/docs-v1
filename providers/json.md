@@ -18,7 +18,7 @@ yarn add @joshdb/json
 
 ### Usage
 
-Here's how you setup and use the JSON provider:&#x20;
+Here's how you setup and use the JSON provider:
 
 ```javascript
 const Josh = require('@joshdb/core');

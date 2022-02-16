@@ -4,7 +4,7 @@ description: How to install the JOSH Core Database Wrapper
 
 # Installation
 
-JOSH is installed very simply through `yarn` or `npm`:&#x20;
+JOSH is installed very simply through `yarn` or `npm`:
 
 ```
 npm i @joshdb/core

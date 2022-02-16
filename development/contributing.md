@@ -4,7 +4,7 @@ description: Want to contribute to Josh's development? Please read this page!
 
 # Contributing
 
-I love coding, but sometimes, managing multiple projects can be a tough job. I welcome the contributions of the community to make the experience of using JOSH better.&#x20;
+I love coding, but sometimes, managing multiple projects can be a tough job. I welcome the contributions of the community to make the experience of using JOSH better.
 
 ### What can you contribute?
 

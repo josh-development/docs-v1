@@ -6,7 +6,7 @@ description: >-
 
 # SQLite
 
-SQLite communication is provided by better-sqlite3.&#x20;
+SQLite communication is provided by better-sqlite3.
 
 This provider requires building better-sqlite3 from source, so you'll need to make sure your system is ready for that.
 

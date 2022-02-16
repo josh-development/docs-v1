@@ -12,7 +12,7 @@ There are not provider options with the IndexedDB provider, but an empty option 
 
 ### Using with Webpack
 
-To use with Webpack, install with your project:&#x20;
+To use with Webpack, install with your project:
 
 ```
 npm i @joshdb/indexeddb

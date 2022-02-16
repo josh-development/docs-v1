@@ -61,7 +61,7 @@ Mongo Atlas is a free mongodb hosting service made by, if that wasn't obvious, t
 The setup for Mongo Atlas goes something like this:
 
 * Get an account at [mongodb.com](https://www.mongodb.com/cloud/atlas)
-* Once created, setup your cluster:&#x20;
+* Once created, setup your cluster:
   * Provider & Region: Up to you, I chose AWS in my test (but you might have a closer free region!). Make sure to select a "FREE TIER AVAILABLE" region!
   * Keep the M0 cluster tier (the only free one). You may select backups if you want, other additional options are paid.
   * Type in a cluster name of your choice. Something like `guidebot-cluster`.
@@ -69,7 +69,7 @@ The setup for Mongo Atlas goes something like this:
   * Go make a sandwich, setup can take a while...
   * Click the Collection button in the middle of the page.
   * Click Create Database. Enter a name such as `guidebot-session` then a collection name such as `sessions`.
-* Now that the cluster is created, we now need to get a connection string. But we need to create a user, which there's a wizard for.&#x20;
+* Now that the cluster is created, we now need to get a connection string. But we need to create a user, which there's a wizard for.
   * Click **Command Line Tools** at the top of the cluster window, then click **Connect Instructions**.
   * Click **Add your Current IP** if you're on the machine that will host your bot. Otherwise, click **Add a Different IP Address** and enter it on the left. Click **Add IP Address**.
   * Enter a database access _username_ and _password_, then click **Create MongoDB User**.

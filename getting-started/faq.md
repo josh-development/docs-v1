@@ -12,7 +12,7 @@ Not really. While JOSH does have some features Enmap doesn't (such as providers,
 
 There's a few indications that maybe you'd want to move away from this system.
 
-One of them is if you need more control over the data and how it's stored. JOSH just throws anything you give it into a database, it makes no effort to check, type, or validate that data.&#x20;
+One of them is if you need more control over the data and how it's stored. JOSH just throws anything you give it into a database, it makes no effort to check, type, or validate that data.
 
 Another is if you require modelling ("models") or types for your data, as in, very specific limitations on what data can be stored. I've no intention of adding these features.
 
